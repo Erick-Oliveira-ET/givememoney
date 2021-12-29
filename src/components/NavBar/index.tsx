@@ -15,7 +15,7 @@ import { useTheme } from "@mui/material/styles";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { useRouter } from "next/router";
-import Link from "next/Link";
+import Link from "next/link";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { CartContext } from "@/contexts/CartContext";
 import Badge from "@mui/material/Badge";

@@ -20,7 +20,7 @@ const Success = () => {
     if (data) {
       clearCart();
     }
-  }, [data]);
+  }, [data, clearCart]);
 
   return (
     <div
