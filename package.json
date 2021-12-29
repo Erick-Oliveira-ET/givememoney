@@ -9,13 +9,23 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/styled": "^11.6.0",
+    "@mui/icons-material": "^5.2.5",
+    "@mui/material": "^5.2.6",
     "@paypal/react-paypal-js": "^7.3.3",
+    "@stripe/react-stripe-js": "^1.7.0",
+    "@stripe/stripe-js": "^1.22.0",
+    "axios": "^0.24.0",
+    "micro": "^9.3.4",
     "next": "11.1.2",
     "next-i18next": "^8.6.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "stripe": "^8.194.0",
+    "swr": "^1.1.2"
   },
   "devDependencies": {
+    "@types/micro": "^7.3.6",
     "@types/react": "17.0.19",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
