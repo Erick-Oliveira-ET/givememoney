@@ -1,42 +1,49 @@
+import { CircularProgress, Typography } from "@mui/material";
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../contexts/CartContext";
+import { Container } from "./styled";
 
 const Success = () => {
   const {
     query: { session_id },
   } = useRouter();
   const [error, setError] = useState();
+  const [loading, setLoading] = useState(true);
   const { clearCart } = useContext(CartContext);
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get(`api/checkout_sessions/${session_id}`)
       .then((res) => {
-        console.log("Deu certo");
-        console.log(res);
         setError(undefined);
         if (res) clearCart();
       })
       .catch((err) => {
         console.error(err);
         setError(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [clearCart]);
 
+  if (loading) {
+    return (
+      <Container container alignItems="center" justifyContent={"center"}>
+        <CircularProgress />
+      </Container>
+    );
+  }
+
   return (
-    <div
-      style={{
-        width: "100vw",
-        height: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      {error ? <h1>Falha na Transação</h1> : <h1>Parabéns pela Compra</h1>}
-    </div>
+    <Container container alignItems="center" justifyContent={"center"}>
+      <Typography variant="h1" sx={{ color: "yellow" }} align="center">
+        Muito obrigado pelo apoio!! Fico muito feliz!!! 😁
+      </Typography>
+    </Container>
   );
 };
 

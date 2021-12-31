@@ -15,7 +15,9 @@ interface CartProviderProps {
 export interface CartProduct {
   id: string;
   name: string;
+  description: string;
   quantity: number;
+  mainImageUrl: string;
 }
 
 export const CartContext = createContext({} as CartContextData);

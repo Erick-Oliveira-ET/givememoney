@@ -1,5 +1,3 @@
-import { useTranslation } from "next-i18next";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import CardMedia from "@mui/material/CardMedia";
@@ -11,8 +9,10 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import { Container } from "./styled";
 import { CartContext } from "@/contexts/CartContext";
+import { CircularProgress } from "@mui/material";
 
 export default function Products() {
+  const [loading, setLoading] = useState(true);
   const [productsList, setProductsList] = useState<any>();
   const { addItem } = useContext(CartContext);
 
@@ -25,13 +25,30 @@ export default function Products() {
       })
       .catch((err) => {
         console.error(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
   const addToCartHandle = (item: any) => {
-    const res = addItem({ id: item.id, name: item.name, quantity: 1 });
+    const res = addItem({
+      id: item.id,
+      name: item.name,
+      description: item.description,
+      quantity: 1,
+      mainImageUrl: item.images[0],
+    });
     if (res) console.log("Esse item já está no carrinho!!");
   };
+
+  if (loading) {
+    return (
+      <Container container alignItems={"center"} justifyContent="center">
+        <CircularProgress />
+      </Container>
+    );
+  }
 
   return (
     <Container container justifyContent="center">
