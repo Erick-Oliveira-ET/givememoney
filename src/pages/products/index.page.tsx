@@ -13,7 +13,6 @@ import { Container } from "./styled";
 import { CartContext } from "@/contexts/CartContext";
 
 export default function Products() {
-  const { t } = useTranslation("common");
   const [productsList, setProductsList] = useState<any>();
   const { addItem } = useContext(CartContext);
 
@@ -62,13 +61,4 @@ export default function Products() {
       )}
     </Container>
   );
-}
-
-export async function getStaticProps({ locale }: any) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, ["common"])),
-      // Will be passed to the page component as props
-    },
-  };
 }

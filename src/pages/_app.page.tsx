@@ -6,19 +6,24 @@ import NavBar from "@/components/NavBar";
 import Head from "next/head";
 import { CustomThemeProvider } from "@/contexts/ThemeContext";
 import CssBaseline from "@mui/material/CssBaseline";
+import { wrapper } from "store";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <CustomThemeProvider>
-      <CssBaseline />
-      <CartProvider>
-        <Head>
-          <title>💸Give❤Erick❤Money💸</title>
-        </Head>
-        <NavBar />
-        <Component {...pageProps} />
-      </CartProvider>
-    </CustomThemeProvider>
+    <>
+      <Head>
+        <title>💸Give❤Erick❤Money💸</title>
+      </Head>
+      <CustomThemeProvider>
+        <CssBaseline />
+        <CartProvider>
+          <NavBar />
+          <main>
+            <Component {...pageProps} />
+          </main>
+        </CartProvider>
+      </CustomThemeProvider>
+    </>
   );
 }
-export default appWithTranslation(MyApp);
+export default MyApp;

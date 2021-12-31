@@ -1,0 +1,3 @@
+// THEME
+export const THEME_UPDATE = "THEME_UPDATE";
+export const THEME_MODE_UPDATE = "THEME_MODE_UPDATE";

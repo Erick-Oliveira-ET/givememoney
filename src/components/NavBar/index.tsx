@@ -28,8 +28,8 @@ const pages = [
 const NavBar = () => {
   const { toggleColorMode } = useContext(ThemeContext);
   const { cartQuantity } = useContext(CartContext);
-  const theme = useTheme();
   const router = useRouter();
+  const theme = useTheme();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
