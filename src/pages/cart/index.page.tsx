@@ -7,23 +7,23 @@ const Cart = () => {
   const { cartDetails } = useContext(CartContext);
 
   const redirectToCheckout = async () => {
-    console.log("cartDetails", cartDetails);
-
     let temp: any[] = [];
     if (cartDetails) {
       cartDetails.forEach(({ id, quantity }) => {
-        temp.push({ price_data: { currency: "BRL", product: id }, quantity });
+        temp.push({
+          price_data: { currency: "BRL", product: id, unit_amount: 100 },
+          quantity,
+        });
       });
     }
 
-    console.log("temp", temp);
     // Create axios checkout
-    const { data: id } = await axios.post("/api/checkout_sessions", {
+    const checkoutRes: any = await axios.post("/api/checkout_sessions", {
       items: temp,
     }); // Internal request to the next server in the project
 
     const stripe = await getStripe();
-    await stripe?.redirectToCheckout({ sessionId: id });
+    await stripe?.redirectToCheckout({ sessionId: checkoutRes.data.id });
   };
 
   return (

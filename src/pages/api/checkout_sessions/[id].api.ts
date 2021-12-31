@@ -5,7 +5,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
 });
 
 export default async function handler(req: any, res: any) {
-  const id = req.header.id;
+  const id = req.query.id;
 
   try {
     if (!id.startsWith("cs_")) {
@@ -15,6 +15,7 @@ export default async function handler(req: any, res: any) {
 
     res.status(200).json(checkout_session);
   } catch (err: any) {
+    console.log(err);
     res.status(500).json({ statusCode: 500, message: err.message });
   }
 }

@@ -1,26 +1,29 @@
+import axios from "axios";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect } from "react";
-import useSWR from "swr";
+import React, { useContext, useEffect, useState } from "react";
 import { CartContext } from "../../contexts/CartContext";
-import fetcher from "../../utils/fetcher";
 
 const Success = () => {
   const {
     query: { session_id },
   } = useRouter();
-
+  const [error, setError] = useState();
   const { clearCart } = useContext(CartContext);
 
-  const { data, error } = useSWR(
-    () => `api/checkout_sessions/${session_id}`,
-    fetcher
-  );
-
   useEffect(() => {
-    if (data) {
-      clearCart();
-    }
-  }, [data, clearCart]);
+    axios
+      .get(`api/checkout_sessions/${session_id}`)
+      .then((res) => {
+        console.log("Deu certo");
+        console.log(res);
+        setError(undefined);
+        if (res) clearCart();
+      })
+      .catch((err) => {
+        console.error(err);
+        setError(err);
+      });
+  }, [clearCart]);
 
   return (
     <div
