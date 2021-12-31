@@ -28,7 +28,7 @@ const Success = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [clearCart]);
+  }, [clearCart, session_id]);
 
   if (loading) {
     return (

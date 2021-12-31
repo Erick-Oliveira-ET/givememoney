@@ -48,7 +48,7 @@ function HideOnScroll(props: Props) {
 
 const pages = [{ label: "Produtos", route: "/products" }];
 
-const NavBar = (props: Props) => {
+const NavBar = () => {
   const { toggleColorMode } = useContext(ThemeContext);
   const { cartQuantity } = useContext(CartContext);
   const router = useRouter();
@@ -72,7 +72,7 @@ const NavBar = (props: Props) => {
   };
 
   return (
-    <HideOnScroll {...props}>
+    <HideOnScroll>
       <AppBar>
         <Container maxWidth="xl">
           <Toolbar disableGutters>
